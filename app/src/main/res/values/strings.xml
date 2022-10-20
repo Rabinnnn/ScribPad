@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Scribpad</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <string name="agreement">I agree to the terms and conditions.</string>
+    <string name="clear_pad">Clear Pad</string>
+    <string name="save_signature">Save Signature</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="open_existing_patient_s_file">Open Existing Patient\'s File</string>
+    <string name="create_new_patient_s_file">Create New Patient\'s File</string>
+    <string name="click_a_record_to_view_more">Click a record to view more</string>
+    <string name="date_created">Date created</string>
+    <string name="tag_no">Tag No:</string>
+    <string name="name">Name:</string>
+    <string name="enter_patient_s_name">Enter Patient\'s Name</string>
+    <string name="enter_patient_s_tag_no">Enter Patient\'s Tag No.</string>
+    <string name="button">Button</string>
+    <string name="fingerprint">Fingerprint</string>
+    <string name="get_records">GET RECORDS</string>
+    <string name="assign_tag_no">Assign Tag No.</string>
+
+
+    <string name="enter_full_name">Enter Full Name</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_id_number">Enter ID number</string>
+    <string name="title_activity_displayed_patients_records2">Displayed_Patients_Records2</string>
+    <string name="symptoms">SYMPTOMS</string>
+    <string name="treatment">TREATMENT</string>
+    <string name="notes">NOTES</string>
+
+    <string name="title_activity_create_new_record2">Create_New_Record2</string>
+    <string name="add_new_record">ADD NEW RECORD</string>
+    <string name="string_extended_fab_content_desc">+@string/extended_fab_content_desc</string>
+    <string name="appp_name">main</string>
+    <string name="todo">TODO</string>
+    <string name="tod">tod</string>
+</resources>

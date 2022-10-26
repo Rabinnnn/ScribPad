@@ -169,8 +169,11 @@ public class UploadNotes extends AppCompatActivity {
             StorageReference ref
                     = storageReference
                     .child(
-                            "notes/"
-                                    + UUID.randomUUID().toString());
+                            "notes/"+
+                                    // UUID.randomUUID().toString()
+                            Create_New_Record.name.getText().toString()
+
+                    );
 
             // adding listeners on upload
             // or failure of image
@@ -225,6 +228,7 @@ public class UploadNotes extends AppCompatActivity {
                                                     + (int)progress + "%");
                                 }
                             });
+    /*
             _fileURL = ref.getDownloadUrl();
             //INITIALIZE FIRESTORE
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -245,6 +249,9 @@ public class UploadNotes extends AppCompatActivity {
                             Log.w(TAG, "Error adding document", e);
                         }
                     });
+
+
+     */
         }
     }
 

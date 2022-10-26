@@ -51,4 +51,5 @@
     <string name="appp_name">main</string>
     <string name="todo">TODO</string>
     <string name="tod">tod</string>
+    <string name="enter_patient_s_id_number">Enter Patient\'s ID number</string>
 </resources>

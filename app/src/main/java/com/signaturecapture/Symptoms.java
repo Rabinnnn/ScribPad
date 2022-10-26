@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class Symptoms extends Fragment {
     private SignaturePad mSignaturePad;
     private Button mClearButton;
     private Button mSaveButton;
+    public TextView T6;
     public SectionsPagerAdapter sectionsPagerAdapter;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     // Create a storage reference from our app
@@ -93,15 +95,22 @@ public class Symptoms extends Fragment {
 
         });
 
+
+
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
 
                 if (addJpgSignatureToGallery(signatureBitmap)) {
+                    Intent intent = getActivity().getIntent();
+                    String str = intent.getStringExtra("Name");
+
 
                     Intent i = new Intent(getActivity(), UploadSymptoms.class);
+                    i.putExtra("Name", str);
                     startActivity(i);
+
                     Toast.makeText(getActivity(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Unable to store the signature", Toast.LENGTH_SHORT).show();

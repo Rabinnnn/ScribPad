@@ -2,6 +2,7 @@ package com.signaturecapture;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import com.signaturecapture.ui.main.SectionsPagerAdapter;
@@ -53,6 +54,10 @@ public class Create_New_Record2 extends AppCompatActivity {
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
 
+
+
+
+
         ;
         //dj =  sectionsPagerAdapter.getPageTitle(this.getIndex());
         // dj = sectionsPagerAdapter.getPageTitle(1);
@@ -63,6 +68,7 @@ public class Create_New_Record2 extends AppCompatActivity {
                 .commit();*/
 
     }
+
     public static void verifyStoragePermissions(Activity activity) {
 
         // Check if we have write permission

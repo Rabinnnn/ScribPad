@@ -205,8 +205,8 @@ public class LoginActivity extends AppCompatActivity {
                 }); */
                 //INITIALIZE FIRESTORE
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-            String email = usernameEditText.getText().toString();
-            String pwd = passwordEditText.getText().toString();
+                String email = usernameEditText.getText().toString();
+                String pwd = passwordEditText.getText().toString();
 
                 // Create a new user with a first and last name
                 Map<String, Object> creds = new HashMap<>();

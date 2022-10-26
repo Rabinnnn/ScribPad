@@ -14,20 +14,20 @@
         android:layout_marginTop="209dp"
         android:layout_marginBottom="50dp"
         android:ems="10"
+        android:hint="@string/enter_patient_s_name"
         android:inputType="textPersonName"
-        android:text="@string/enter_patient_s_name"
-        app:layout_constraintBottom_toTopOf="@+id/tag_search"
+        app:layout_constraintBottom_toTopOf="@+id/id_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/tag_search"
+        android:id="@+id/id_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="196dp"
         android:ems="10"
+        android:hint="@string/enter_patient_s_id_number"
         android:inputType="textPersonName"
-        android:text="@string/enter_patient_s_tag_no"
         app:layout_constraintBottom_toTopOf="@+id/search_fingerprint"
         app:layout_constraintStart_toStartOf="@+id/name_search"
         app:layout_constraintTop_toBottomOf="@+id/name_search" />
@@ -52,5 +52,5 @@
         android:text="@string/fingerprint"
         app:layout_constraintBottom_toTopOf="@+id/get_search_records"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tag_search" />
+        app:layout_constraintTop_toBottomOf="@+id/id_search" />
 </androidx.constraintlayout.widget.ConstraintLayout>

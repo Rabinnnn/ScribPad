@@ -1,9 +1,12 @@
 package com.signaturecapture;
 
 import static android.content.ContentValues.TAG;
+import com.signaturecapture.Create_New_Record;
+
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,13 +16,19 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.signaturecapture.Create_New_Record;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,6 +61,19 @@ public class UploadSymptoms extends AppCompatActivity {
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
 
+    //Metadata variables
+    public String Name;
+    public String Phone;
+    public String ID;
+    public TextView tt;
+
+    public EditText name;
+    public EditText phone;
+    public EditText id;
+
+
+
+
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -61,7 +83,6 @@ public class UploadSymptoms extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload);
-
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
@@ -73,10 +94,32 @@ public class UploadSymptoms extends AppCompatActivity {
         btnSelect = findViewById(R.id.btnChoose);
         btnUpload = findViewById(R.id.btnUpload);
         imageView = findViewById(R.id.imgView);
+        //tt = findViewById(R.id.textView5);
+       /* name = (EditText) findViewById(R.id.upName);
+        phone = (EditText) findViewById(R.id.upPhone);
+        id = (EditText) findViewById(R.id.upID);
+
+        Name = name.getText().toString();
+        Phone = phone.getText().toString();
+        ID = id.getText().toString(); */
+
+
+       // Intent intent = getIntent();
+       // String str = intent.getStringExtra("Name");
+
+       // Name = (Create_New_Record.getValue());
+       // SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+       // String Name = sharedPreferences.getString("Name","");
+       //
+        // String str = Create_New_Record.Name;
+        //tt.setText(Create_New_Record.name.getText().toString());
+
+
 
         // get the Firebase  storage reference
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+
 
         // on pressing btnSelect SelectImage() is called
         btnSelect.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +138,13 @@ public class UploadSymptoms extends AppCompatActivity {
                 uploadImage();
             }
         });
+
+        /*Name = (Create_New_Record.getName());
+        Phone = (Create_New_Record.getPhone());
+        ID = (Create_New_Record.getID()); */
+
+
+
     }
 
     // Select Image method
@@ -164,10 +214,22 @@ public class UploadSymptoms extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
+            // Create file metadata including the content type
+           /* StorageMetadata metadata = new StorageMetadata.Builder()
+                    //.setContentType("image/jpg")
+                    .setCustomMetadata("Name", Create_New_Record.name.getText().toString())
+                    .setCustomMetadata("Phone", Create_New_Record.phone.getText().toString())
+                    .setCustomMetadata("ID", Create_New_Record.id.getText().toString())
+
+                    .build(); */
+
             // Defining the child of storageReference
 
             StorageReference ref = storageReference
-                    .child("symptoms/" + UUID.randomUUID().toString());
+                    .child("symptoms/" +
+                           // UUID.randomUUID().toString()
+                            Create_New_Record.name.getText().toString()
+                    );
 
             // adding listeners on upload
             // or failure of image
@@ -223,7 +285,7 @@ public class UploadSymptoms extends AppCompatActivity {
                                                     + (int)progress + "%");
                                 }
                             });
-         _fileURL = ref.getDownloadUrl();
+       /*  _fileURL = ref.getDownloadUrl();
             //INITIALIZE FIRESTORE
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, Object> symptoms = new HashMap<>();
@@ -242,7 +304,7 @@ public class UploadSymptoms extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Log.w(TAG, "Error adding document", e);
                         }
-                    });
+                    }); */
         }
     }
 

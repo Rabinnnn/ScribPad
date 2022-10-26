@@ -166,7 +166,10 @@ public class UploadTreatment extends AppCompatActivity {
 
             // Defining the child of storageReference
 
-            StorageReference ref = storageReference.child("treatment/" + UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("treatment/" +
+                   // UUID.randomUUID().toString()
+                    Create_New_Record.name.getText().toString()
+            );
 
             // adding listeners on upload
             // or failure of image
@@ -221,6 +224,7 @@ public class UploadTreatment extends AppCompatActivity {
                                 }
                             });
 
+    /*
         _fileURL = ref.getDownloadUrl();
         //INITIALIZE FIRESTORE
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -241,6 +245,8 @@ public class UploadTreatment extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+     */
 
         }
     }

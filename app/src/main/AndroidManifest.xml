@@ -19,7 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SignatureCapture">
         <activity
-            android:name=".ShowAllImagesFromStorage"
+            android:name=".ShowSymptoms"
+            android:exported="false"
+            android:label="@string/title_activity_displayed_patients_records2"
+            android:theme="@style/Theme.SignatureCapture.NoActionBar" />
+        <activity
+            android:name=".ShowTreatment"
+            android:exported="false"
+            android:label="@string/title_activity_displayed_patients_records2"
+            android:theme="@style/Theme.SignatureCapture.NoActionBar" />
+        <activity
+            android:name=".ShowNotes"
             android:exported="false"
             android:label="@string/title_activity_displayed_patients_records2"
             android:theme="@style/Theme.SignatureCapture.NoActionBar" />

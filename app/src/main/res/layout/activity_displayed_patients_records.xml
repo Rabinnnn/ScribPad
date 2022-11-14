@@ -1,10 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    tools:context=".Displayed_Patients_Records">
+    tools:context=".Choose_file">
 
-</androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/imageViewSymptoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewTreatment"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewTreatment"
+        app:srcCompat="@drawable/folder_foreground" />
+
+    <ImageView
+        android:id="@+id/imageViewTreatment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewNotes"
+        app:layout_constraintStart_toEndOf="@+id/imageViewSymptoms"
+        app:layout_constraintTop_toTopOf="@+id/imageViewNotes"
+        app:srcCompat="@drawable/folder_foreground" />
+
+    <ImageView
+        android:id="@+id/imageViewNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewTreatment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/folder_foreground" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="6dp"
+        android:text="@string/symptoms"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewSymptoms"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSymptoms" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="3dp"
+        android:text="@string/treatment"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewTreatment"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTreatment" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="1dp"
+        android:text="@string/notes"
+        app:layout_constraintStart_toStartOf="@+id/imageViewNotes"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewNotes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

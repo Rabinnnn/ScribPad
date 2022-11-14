@@ -29,7 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllImagesFromStorage extends AppCompatActivity {
+public class ShowSymptoms extends AppCompatActivity {
     // ArrayList<String> imagelist;
     private ArrayList<String> uploads;
     RecyclerView recyclerView;
@@ -54,34 +54,6 @@ public class ShowAllImagesFromStorage extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         progressDialog = new ProgressDialog(this);
 
-     /*  mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
-
-        //adding an event listener to fetch values
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                //dismissing the progress dialog
-                progressDialog.dismiss();
-
-                //iterating through all the values in database
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Upload upload = postSnapshot.getValue(Upload.class);
-                    uploads.add(upload.toString());
-                }
-
-                //creating adapter
-                adapter = new ImageAdapter(uploads,getApplicationContext() );
-
-                //adding adapter to recyclerview
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
-           */
 
 
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child("symptoms/"+ Search_Existing_Records.name.getText().toString()+"/");

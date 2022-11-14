@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class Displayed_Patients_Records extends AppCompatActivity {
-    public ImageView imageView1;
+    public ImageView imageView1,imageView2,imageView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_displayed_patients_records);
 
-        MyListData[] myListData = new MyListData[] {
+      /*  MyListData[] myListData = new MyListData[] {
                 new MyListData("January", android.R.drawable.ic_dialog_dialer),
                 new MyListData("February", android.R.drawable.ic_dialog_dialer),
                 new MyListData("March", android.R.drawable.ic_dialog_dialer),
@@ -36,16 +36,37 @@ public class Displayed_Patients_Records extends AppCompatActivity {
         MyListAdapter adapter = new MyListAdapter(myListData);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-      /*  imageView1 = findViewById(R.id.imageViewJan);
+        recyclerView.setAdapter(adapter);  */
+        imageView1 = findViewById(R.id.imageViewSymptoms);
+        imageView2 = findViewById(R.id.imageViewTreatment);
+        imageView3 = findViewById(R.id.imageViewNotes);
+
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), Displayed_Patients_Records2.class);
+                Intent i = new Intent(getApplicationContext(), ShowSymptoms.class);
                 startActivity(i);
 
             }
-        }); */
+        });
+
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ShowTreatment.class);
+                startActivity(i);
+
+            }
+        });
+
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ShowNotes.class);
+                startActivity(i);
+
+            }
+        });
     }
 }

@@ -2,6 +2,7 @@ package com.signaturecapture;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.signaturecapture.databinding.ActivityCreateNewRecord2Binding;
 
+import java.util.List;
+
 
 public class Create_New_Record2 extends AppCompatActivity {
 
@@ -31,6 +34,8 @@ public class Create_New_Record2 extends AppCompatActivity {
     private Button mSaveButton;
     public SectionsPagerAdapter sectionsPagerAdapter;
     CharSequence dj;
+    private Context context;
+    private List<Upload> uploads;
 
 
 

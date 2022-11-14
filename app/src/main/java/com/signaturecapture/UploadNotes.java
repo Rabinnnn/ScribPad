@@ -47,7 +47,9 @@ public class UploadNotes extends AppCompatActivity {
     private Uri filePath;
 
     //Download Uploaded image url
-    public Task<Uri> _fileURL;
+   // public Task<Uri> _fileURL;
+    public String _fileURL;
+
 
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
@@ -169,9 +171,9 @@ public class UploadNotes extends AppCompatActivity {
             StorageReference ref
                     = storageReference
                     .child(
-                            "notes/"+
+                            "notes/"+ Create_New_Record.name.getText().toString()+"/"+
                                     // UUID.randomUUID().toString()
-                            Create_New_Record.name.getText().toString()
+                            Create_New_Record.name.getText().toString()+UUID.randomUUID().toString()
 
                     );
 
@@ -194,6 +196,29 @@ public class UploadNotes extends AppCompatActivity {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+
+                                    _fileURL = ref.getDownloadUrl().toString();
+                                    //INITIALIZE FIRESTORE
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    Map<String, Object> Notes = new HashMap<>();
+                                    Notes.put("Notes", _fileURL );
+
+                                    db.collection("Notes")
+                                            .add(Notes)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error adding document", e);
+                                                }
+                                            });
+
+
                                 }
                             })
 
@@ -228,8 +253,8 @@ public class UploadNotes extends AppCompatActivity {
                                                     + (int)progress + "%");
                                 }
                             });
-    /*
-            _fileURL = ref.getDownloadUrl();
+
+          /*  _fileURL = ref.getDownloadUrl();
             //INITIALIZE FIRESTORE
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, Object> Notes = new HashMap<>();
@@ -248,10 +273,10 @@ public class UploadNotes extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Log.w(TAG, "Error adding document", e);
                         }
-                    });
+                    }); */
 
 
-     */
+
         }
     }
 

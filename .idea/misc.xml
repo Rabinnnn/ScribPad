@@ -15,10 +15,13 @@
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/activity_create_new_record2.xml" value="0.15367180417044424" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/activity_displayed_patients_records.xml" value="0.25" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/activity_displayed_patients_records2.xml" value="0.16772438803263826" />
+        <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/activity_main.xml" value="0.13100634632819583" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/activity_search_existing_records.xml" value="0.16772438803263826" />
+        <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/activity_showallimages.xml" value="0.1" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/fragment_create__new__record2.xml" value="0.1" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/fragment_displayed__patients__records2.xml" value="0.15639165911151406" />
-        <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/item.xml" value="0.1" />
+        <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/list_item.xml" value="0.33" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/symptoms.xml" value="0.15367180417044424" />
         <entry key="..\:/Users/Rabin/Desktop/ScribPad/app/src/main/res/layout/upload.xml" value="0.25" />
         <entry key="..\:/Users/Rabin/Desktop/SignatureCapture/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />

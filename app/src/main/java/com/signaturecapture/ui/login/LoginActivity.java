@@ -28,8 +28,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.signaturecapture.Choose_file;
@@ -57,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private FirebaseAuth mAuth;
     Realm uiThreadRealm;
     App app;
     MongoClient mongoClient;
@@ -89,6 +95,35 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("QUICKSTART", "Failed to log in. Error: " + result.getError());
             }
         }); */
+
+// ...
+// Anonymous Auth
+        final  FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            String user = mAuth.getCurrentUser().toString();
+                            Toast.makeText(getApplicationContext(), "Authentication successful.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                          //  updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+
 
 
 
@@ -238,6 +273,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();

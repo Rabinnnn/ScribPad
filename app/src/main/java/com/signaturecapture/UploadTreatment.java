@@ -47,7 +47,8 @@ public class UploadTreatment extends AppCompatActivity {
     private Uri filePath;
 
     //Download Uploaded image url
-    public Task<Uri> _fileURL;
+    //public Task<Uri> _fileURL;
+    public String _fileURL;
 
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
@@ -166,9 +167,9 @@ public class UploadTreatment extends AppCompatActivity {
 
             // Defining the child of storageReference
 
-            StorageReference ref = storageReference.child("treatment/" +
+            StorageReference ref = storageReference.child("treatment/" + Create_New_Record.name.getText().toString()+"/"+
                    // UUID.randomUUID().toString()
-                    Create_New_Record.name.getText().toString()
+                    Create_New_Record.name.getText().toString()+UUID.randomUUID().toString()
             );
 
             // adding listeners on upload
@@ -190,6 +191,28 @@ public class UploadTreatment extends AppCompatActivity {
                                                     "Image Uploaded!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+
+                                    _fileURL = ref.getDownloadUrl().toString();
+                                    //INITIALIZE FIRESTORE
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    Map<String, Object> Treatment = new HashMap<>();
+                                    Treatment.put("Treatment", _fileURL );
+
+                                    db.collection("Treatment")
+                                            .add(Treatment)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error adding document", e);
+                                                }
+                                            });
+
                                 }
                             })
 
@@ -231,7 +254,7 @@ public class UploadTreatment extends AppCompatActivity {
         Map<String, Object> Treatment = new HashMap<>();
         Treatment.put("Treatment", _fileURL );
 
-        db.collection("Notes")
+        db.collection("Treatment")
                 .add(Treatment)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

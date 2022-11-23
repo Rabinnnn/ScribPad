@@ -17,14 +17,16 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_up">Sign up</string>
+
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome "</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="open_existing_patient_s_file">Open Existing Patient\'s File</string>
-    <string name="create_new_patient_s_file">Create New Patient\'s File</string>
+    <string name="open_existing_patient_s_file">Open Existing File</string>
+    <string name="create_new_patient_s_file">Create New File</string>
     <string name="click_a_record_to_view_more">Click a record to view more</string>
     <string name="date_created">Date created</string>
     <string name="tag_no">Tag No:</string>

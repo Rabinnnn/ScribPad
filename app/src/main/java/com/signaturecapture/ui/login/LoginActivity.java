@@ -137,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
+        username = (EditText) findViewById(R.id.username);
 
 
 
@@ -220,6 +221,16 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+                //INITIALIZE FIRESTORE
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String email = usernameEditText.getText().toString();
+                String pwd = passwordEditText.getText().toString();
+
+                // Create a new user with a first and last name
+                Map<String, Object> creds = new HashMap<>();
+                creds.put("Email", email);
+                creds.put("Password", pwd);
+
                 Intent i = new Intent(getApplicationContext(), Choose_file.class);
                 startActivity(i);
 
@@ -238,15 +249,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.v("Data","Error:"+result.getError().toString());
                     }
                 }); */
-                //INITIALIZE FIRESTORE
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String email = usernameEditText.getText().toString();
-                String pwd = passwordEditText.getText().toString();
-
-                // Create a new user with a first and last name
-                Map<String, Object> creds = new HashMap<>();
-                creds.put("Email", email);
-                creds.put("Password", pwd);
 
 
 // Add a new document with a generated ID
@@ -276,7 +278,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = getString(R.string.welcome) + username.getText().toString()+"!";
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

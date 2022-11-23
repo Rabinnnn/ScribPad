@@ -7,76 +7,50 @@
     tools:context=".Create_New_Record">
 
     <Button
-        android:id="@+id/assignTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginBottom="142dp"
-        android:text="@string/assign_tag_no"
-        app:layout_constraintBottom_toTopOf="@+id/fingerprint"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idNumber" />
-
-    <TextView
-        android:id="@+id/fingerprint"
-        android:layout_width="200dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="59dp"
-        android:text="@string/fingerprint"
-        app:layout_constraintBottom_toTopOf="@+id/go_to_new_records_page2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assignTag" />
-
-    <Button
         android:id="@+id/go_to_new_records_page2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#03A9F4"
         android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fingerprint" />
+        app:layout_constraintTop_toBottomOf="@+id/phone" />
 
     <EditText
         android:id="@+id/fullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginTop="168dp"
         android:ems="10"
         android:hint="@string/enter_full_name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/phone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/idNumber"
+        app:layout_constraintStart_toStartOf="@+id/idNumber"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="57dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
         android:hint="@string/enter_phone_number"
         android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/idNumber"
-        app:layout_constraintStart_toStartOf="@+id/fullName"
-        app:layout_constraintTop_toBottomOf="@+id/fullName" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idNumber" />
 
     <EditText
         android:id="@+id/idNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="95dp"
+        android:layout_marginTop="71dp"
         android:ems="10"
         android:hint="@string/enter_id_number"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/assignTag"
+        app:layout_constraintEnd_toEndOf="@+id/phone"
         app:layout_constraintStart_toStartOf="@+id/phone"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/fullName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

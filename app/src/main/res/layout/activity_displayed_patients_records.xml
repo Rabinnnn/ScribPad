@@ -11,40 +11,37 @@
         android:id="@+id/imageViewSymptoms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewTreatment"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageViewTreatment"
+        android:layout_marginTop="128dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewTreatment"
+        app:layout_constraintStart_toStartOf="@+id/imageViewTreatment"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/folder_foreground" />
 
     <ImageView
         android:id="@+id/imageViewTreatment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewNotes"
-        app:layout_constraintStart_toEndOf="@+id/imageViewSymptoms"
-        app:layout_constraintTop_toTopOf="@+id/imageViewNotes"
+        android:layout_marginTop="86dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewNotes"
+        app:layout_constraintStart_toStartOf="@+id/imageViewNotes"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:srcCompat="@drawable/folder_foreground" />
 
     <ImageView
         android:id="@+id/imageViewNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewTreatment"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@drawable/folder_foreground" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/symptoms"
         app:layout_constraintEnd_toEndOf="@+id/imageViewSymptoms"
         app:layout_constraintTop_toBottomOf="@+id/imageViewSymptoms" />
@@ -53,18 +50,16 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginStart="13dp"
         android:text="@string/treatment"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewTreatment"
+        app:layout_constraintStart_toStartOf="@+id/imageViewTreatment"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTreatment" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="30dp"
         android:text="@string/notes"
         app:layout_constraintStart_toStartOf="@+id/imageViewNotes"
         app:layout_constraintTop_toBottomOf="@+id/imageViewNotes" />

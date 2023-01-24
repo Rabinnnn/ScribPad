@@ -2,13 +2,19 @@ package com.signaturecapture.ui.login;
 
 import static android.content.ContentValues.TAG;
 
+import android.Manifest;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.KeyguardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.biometrics.BiometricPrompt;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.CancellationSignal;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -63,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
+    private CancellationSignal cancellationSignal;
     Realm uiThreadRealm;
     App app;
     MongoClient mongoClient;
@@ -77,20 +85,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkBiometricSupport();
         // Mongodb Atlas
     /*    Realm.init(this); // context, usually an Activity or Application
-
-
         app = new App(new AppConfiguration.Builder("scribpad-0-chpwp")
                 .build());
-
         Credentials credentials = Credentials.anonymous();
-
         app.loginAsync(credentials, result -> {
             if (result.isSuccess()) {
                 Log.v("QUICKSTART", "Successfully authenticated anonymously.");
                 User user = app.currentUser();
-
             } else {
                 Log.e("QUICKSTART", "Failed to log in. Error: " + result.getError());
             }
@@ -109,15 +113,15 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
                             String user = mAuth.getCurrentUser().toString();
-                            Toast.makeText(getApplicationContext(), "Authentication successful.",
+                            Toast.makeText(getApplicationContext(), " Cloud Connection successful.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                            Toast.makeText(getApplicationContext(), "Cloud Connection failed.",
                                     Toast.LENGTH_SHORT).show();
-                          //  updateUI(null);
+                            //  updateUI(null);
                         }
 
                         // ...
@@ -136,8 +140,8 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
+        final TextView go_to_signup = binding.goToSignup;
         final ProgressBar loadingProgressBar = binding.loading;
-        username = (EditText) findViewById(R.id.username);
 
 
 
@@ -174,13 +178,12 @@ public class LoginActivity extends AppCompatActivity {
                         public void onClick(View v)
                         {   Intent i = new Intent(getApplicationContext(), Choose_file.class);
                             startActivity(i);
-
                         } }   ); */
                 }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-               // finish();
+                // finish();
             }
         });
 
@@ -221,16 +224,6 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
-                //INITIALIZE FIRESTORE
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String email = usernameEditText.getText().toString();
-                String pwd = passwordEditText.getText().toString();
-
-                // Create a new user with a first and last name
-                Map<String, Object> creds = new HashMap<>();
-                creds.put("Email", email);
-                creds.put("Password", pwd);
-
                 Intent i = new Intent(getApplicationContext(), Choose_file.class);
                 startActivity(i);
 
@@ -238,7 +231,6 @@ public class LoginActivity extends AppCompatActivity {
                 mongoClient = user.getMongoClient("mongodb-atlas");
                 mongoDatabase = mongoClient.getDatabase("crap");
                 MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("crappy");
-
                 mongoCollection.insertOne(new Document("userid",user.getId()).append("email",usernameEditText.getText().toString()).append("pwd",passwordEditText.getText().toString())).getAsync(result -> {
                     if(result.isSuccess())
                     {
@@ -249,6 +241,15 @@ public class LoginActivity extends AppCompatActivity {
                         Log.v("Data","Error:"+result.getError().toString());
                     }
                 }); */
+                //INITIALIZE FIRESTORE
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String email = usernameEditText.getText().toString();
+                String pwd = passwordEditText.getText().toString();
+
+                // Create a new user with a first and last name
+                Map<String, Object> creds = new HashMap<>();
+                creds.put("Email", email);
+                creds.put("Password", pwd);
 
 
 // Add a new document with a generated ID
@@ -259,16 +260,28 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                Toast.makeText(getApplicationContext(), "Login successful.",
+                                    Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.w(TAG, "Error adding document", e);
+                                Toast.makeText(getApplicationContext(), "Login failed.",
+                                    Toast.LENGTH_SHORT).show();
                             }
                         }); */
 
 
+            }
+        });
+
+        go_to_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegistrationActivity.class);
+                startActivity(i);
             }
         });
 
@@ -277,8 +290,104 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    private Boolean checkBiometricSupport() {
+
+        KeyguardManager keyguardManager =
+                (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+
+        PackageManager packageManager = this.getPackageManager();
+
+        if (!keyguardManager.isKeyguardSecure()) {
+            notifyUser("Lock screen security not enabled in Settings");
+            return false;
+        }
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.USE_BIOMETRIC) !=
+                PackageManager.PERMISSION_GRANTED) {
+
+            notifyUser("Fingerprint authentication permission not enabled");
+            return false;
+        }
+
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+        {
+            return true;
+        }
+
+        return true;
+    }
+
+    private BiometricPrompt.AuthenticationCallback getAuthenticationCallback() {
+
+        return new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              CharSequence errString) {
+                notifyUser("Authentication error: " + errString);
+                super.onAuthenticationError(errorCode, errString);
+            }
+
+            @Override
+            public void onAuthenticationHelp(int helpCode,
+                                             CharSequence helpString) {
+                super.onAuthenticationHelp(helpCode, helpString);
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    BiometricPrompt.AuthenticationResult result) {
+                notifyUser("Authentication Succeeded");
+                super.onAuthenticationSucceeded(result);
+            }
+        };
+    }
+
+    private CancellationSignal getCancellationSignal() {
+
+        cancellationSignal = new CancellationSignal();
+        cancellationSignal.setOnCancelListener(new
+                                                       CancellationSignal.OnCancelListener() {
+                                                           @Override
+                                                           public void onCancel() {
+                                                               notifyUser("Cancelled via signal");
+                                                           }
+                                                       });
+        return cancellationSignal;
+    }
+
+    private void notifyUser(String message) {
+        Toast.makeText(this,
+                message,
+                Toast.LENGTH_LONG).show();
+    }
+
+    public void authenticateUser(View view) {
+        BiometricPrompt biometricPrompt = new BiometricPrompt.Builder(this)
+                .setTitle("Biometric Demo")
+                .setSubtitle("Authentication is required to continue")
+                .setDescription("This app uses biometric authentication to protect your data.")
+                .setNegativeButton("Cancel", this.getMainExecutor(),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                notifyUser("Authentication cancelled");
+                            }
+                        })
+                .build();
+
+        biometricPrompt.authenticate(getCancellationSignal(), getMainExecutor(),
+                getAuthenticationCallback());
+    }
+
+
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + username.getText().toString()+"!";
+        String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
